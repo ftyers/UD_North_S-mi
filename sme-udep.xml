@@ -20,7 +20,7 @@
         <copy-of select="NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]/@*"/>
         <!--<attr name="si">nmod</attr>--> <!-- When there is coordination "Dubmejehkos..." -->
         <NODE>
-          <!--<attr name="si">case</attr>-->
+          <attr name="si">case</attr>
           <copy-of select="@*[name()!='si']"/>
         </NODE>
         <copy-of select="NODE[@si!='→P' and @si !='P←']"/>
@@ -95,7 +95,7 @@
   </def-rule>
 
   <def-rule comment="Change relation for word introducing FS-ADVL">
-    <template match="//NODE[@si='CVP' and @lem='go']">
+    <template match="//NODE[@si='CVP' and @mi='CS']">
         <copy>
         <attr name="si">mark</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -139,6 +139,16 @@
         </copy>
     </template> 
   </def-rule>
+
+  <def-rule comment="Change relation attributive participles"> <!-- CHECK: acl:relcl? -->
+    <template match="//NODE[@si='→N' and contains(@mi, '|PrfPrc')]">
+        <copy>
+        <attr name="si">acl</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
 
   <def-rule comment="A clause with a relative pronoun is @acl:relcl">
     <template match="//NODE[@si='FS-N←' and contains(NODE/@mi, 'Pron|Rel') or contains(NODE/NODE/@mi, 'Pron|Rel')]">
