@@ -132,7 +132,7 @@
   </def-rule>
 
   <def-rule comment="Change relation attributive NP-modifiers of proper nouns to @compound:nn">
-    <template match="//NODE[@si='→N' and contains(ancestor::NODE[1]/@mi, 'N|Prop')]">
+    <template match="//NODE[@si='→N' and contains(@mi, 'N|') and contains(ancestor::NODE[1]/@mi, 'N|Prop')]">
         <copy>
         <attr name="si">compound:nn</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -141,7 +141,7 @@
   </def-rule>
 
   <def-rule comment="A clause with a relative pronoun is @acl:relcl">
-    <template match="//NODE[@si='FS-N←' and contains(NODE/@mi, 'Pron|Rel')]">
+    <template match="//NODE[@si='FS-N←' and contains(NODE/@mi, 'Pron|Rel') or contains(NODE/NODE/@mi, 'Pron|Rel')]">
         <copy>
         <attr name="si">acl:relcl</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
