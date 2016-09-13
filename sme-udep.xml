@@ -1,5 +1,23 @@
 <transfer>
 
+  <def-rule comment="Switch order with chained auxiliaries and main verb">
+    <template match="NODE[@si='FAUX' and NODE[@si='IAUX' and NODE[@si='IMV']]]">
+      <copy>
+        <copy-of select="NODE[@si='IAUX']/NODE[@si='IMV']/@*"/>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si!='IAUX']"/>
+        <NODE>
+          <copy-of select="NODE[@si='IAUX']/@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si='IAUX']/NODE[@si='IMV']/NODE"/>
+      </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Switch order of auxiliary and main verb">
     <template match="NODE[@si='FAUX' and NODE[@si='IMV']]">
       <copy>
@@ -30,12 +48,12 @@
   </def-rule>
 
   <def-rule comment="Change relation genitive NP-modifiers that are under adjectives">
-    <template match="//NODE[@si='→N' and NODE[@si='→A' and (contains(@mi, '|Gen') or contains(@mi, '|Attr'))]]">
+    <template match="//NODE[@si='→N' and NODE[(@si='→A' or @si='→Num') and (contains(@mi, '|Gen') or contains(@mi, '|Attr'))]]">
         <copy>
         <apply-templates select="@*"/>
         </copy>
         <copy>
-        <apply-templates select="NODE[@si='→A']/@*[name()!='si']"/>
+        <apply-templates select="NODE[(@si='→A' or @si='→Num')]/@*[name()!='si']"/>
         <attr name="si">nmod:poss</attr>
         <apply-templates select="NODE/NODE"/>
         </copy>
@@ -189,7 +207,7 @@
   </def-rule>
 
   <def-rule comment="Change relation attributive participles"> <!-- CHECK: acl:relcl? -->
-    <template match="//NODE[@si='→N' and contains(@mi, '|PrfPrc')]">
+    <template match="//NODE[@si='→N' and (contains(@mi, '|PrfPrc') or contains(@mi, 'PrsPrc'))]">
         <copy>
         <attr name="si">acl</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -244,6 +262,15 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change for reflexive pronouns">
+    <template match="//NODE[(@si='→N' or @si='→A' or @si='→Pron' or @si='N←' or @si='A←' or @si='Pron←') and contains(@mi, 'Pron|Refl')]">
+        <copy>
+        <attr name="si">det</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change for demonstrative pronouns">
     <template match="//NODE[(@si='→N' or @si='→A') and contains(@mi, 'Pron|Dem')]">
         <copy>
@@ -263,8 +290,8 @@
   </def-rule>
 
 
-  <def-rule comment="Change relation for adverbs that modify pronouns">
-    <template match="//NODE[(@si='→Pron' or @si='→A') and contains(@mi, 'Adv')]">
+  <def-rule comment="Change relation for adverbs that modify non-verbs/nominals">
+    <template match="//NODE[(@si='→Pron' or @si='→A' or @si='→Num') and contains(@mi, 'Adv')]">
         <copy>
         <attr name="si">advmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -413,6 +440,15 @@
     </template> 
   </def-rule>
 
+
+  <def-rule comment="Change for negative verb">
+    <template match="//NODE[@lem='ii' and contains(@mi, 'V|IV|Neg')]">
+        <copy>
+        <attr name="si">aux:neg</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
 
   <def-rule comment="Change for sentential modifiers">
     <template match="//NODE[@si='S←']">
