@@ -357,6 +357,29 @@
     </template> 
   </def-rule>
 
+  <!-- Rules for arguments of non-finites -->
+
+
+  <def-rule comment="Change for non-clausal objects">
+    <template match="//NODE[(@si='-F←ADVL' or @si='-FADVL→') and not(contains(@mi, 'V|')) and not(contains(@mi, 'Adv'))]">
+        <copy>
+        <attr name="si">nmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
+  <def-rule comment="Change for non-clausal objects">
+    <template match="//NODE[(@si='-F←OBJ' or @si='-FOBJ→') and not(contains(@mi, 'V|'))]">
+        <copy>
+        <attr name="si">dobj</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
   <def-rule comment="Change for sentential modifiers">
     <template match="//NODE[@si='S←']">
         <copy>
