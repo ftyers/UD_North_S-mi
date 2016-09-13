@@ -29,6 +29,18 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation genitive NP-modifiers that are under adjectives">
+    <template match="//NODE[@si='→N' and NODE[@si='→A' and (contains(@mi, '|Gen') or contains(@mi, '|Attr'))]]">
+        <copy>
+        <apply-templates select="@*"/>
+        </copy>
+        <copy>
+        <apply-templates select="NODE[@si='→A']/@*[name()!='si']"/>
+        <attr name="si">nmod:poss</attr>
+        <apply-templates select="NODE/NODE"/>
+        </copy>
+    </template> 
+  </def-rule>
 
   <def-rule comment="Switch order of adposition and complement">
     <template match="NODE[(@si='←ADVL' or @si='ADVL→') and NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
@@ -194,8 +206,6 @@
         </copy>
     </template> 
   </def-rule>
-
-
 
 
   <def-rule comment="Change relation genitive NP-modifiers">
