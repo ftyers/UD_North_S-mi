@@ -119,6 +119,16 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation adjectival (not attributive) NP-modifiers">
+    <template match="//NODE[@si='→N' and (contains(@mi, 'A|Sg') or contains(@mi, 'A|Pl'))]">
+        <copy>
+        <attr name="si">amod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
   <def-rule comment="Change relation numeral NP-modifiers">
     <template match="//NODE[@si='→N' and contains(@mi, 'Num')]">
         <copy>
@@ -216,7 +226,7 @@
   </def-rule>
 
   <def-rule comment="Change for demonstrative pronouns">
-    <template match="//NODE[@si='→N' and contains(@mi, 'Pron|Dem')]">
+    <template match="//NODE[(@si='→N' or @si='→A') and contains(@mi, 'Pron|Dem')]">
         <copy>
         <attr name="si">det</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -323,6 +333,15 @@
     <template match="//NODE[(@si='←OBJ' or @si='OBJ→') and not(contains(@mi, 'V|'))]">
         <copy>
         <attr name="si">dobj</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for sentential modifiers">
+    <template match="//NODE[@si='S←']">
+        <copy>
+        <attr name="si">parataxis</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
