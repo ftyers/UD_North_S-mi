@@ -359,8 +359,25 @@
 
   <!-- Rules for arguments of non-finites -->
 
+  <def-rule comment="Change for adverbials attaching to non-finites">
+    <template match="//NODE[(@si='-F←ADVL' or @si='-FADVL→') and contains(@mi, 'V|')]">
+        <copy>
+        <attr name="si">advcl</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
 
-  <def-rule comment="Change for non-clausal objects">
+  <def-rule comment="Change for adverbials attaching to non-finites">
+    <template match="//NODE[(@si='-F←ADVL' or @si='-FADVL→') and contains(@mi, 'Adv')]">
+        <copy>
+        <attr name="si">advmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for adverbials attaching to non-finites">
     <template match="//NODE[(@si='-F←ADVL' or @si='-FADVL→') and not(contains(@mi, 'V|')) and not(contains(@mi, 'Adv'))]">
         <copy>
         <attr name="si">nmod</attr>
@@ -369,8 +386,25 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change for subjects attaching to non-finites">
+    <template match="//NODE[(@si='-F←SUBJ' or @si='-FSUBJ→') and not(contains(@mi, 'V|'))]">
+        <copy>
+        <attr name="si">nsubj</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
 
-  <def-rule comment="Change for non-clausal objects">
+  <def-rule comment="Change for clausal objects attaching to non-finites">
+    <template match="//NODE[(@si='-F←OBJ' or @si='-FOBJ→') and contains(@mi, 'V|')]">
+        <copy>
+        <attr name="si">ccomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for objects attaching to non-finites">
     <template match="//NODE[(@si='-F←OBJ' or @si='-FOBJ→') and not(contains(@mi, 'V|'))]">
         <copy>
         <attr name="si">dobj</attr>
