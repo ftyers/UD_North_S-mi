@@ -83,16 +83,16 @@
   </def-rule>
 
   <def-rule comment="Switch order of predicate and copula">
-    <template match="NODE[@lem='leat' and NODE[(@si='←SPRED' or @si='SPRED→') and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
+    <template match="NODE[@lem='leat' and NODE[(@si='←SPRED' or @si='SPRED→')]]">
       <copy>
-        <copy-of select="NODE[(@si='←SPRED' or @si='SPRED→') and generate-id(ancestor::NODE[1]) = generate-id(current())]/@*[name()!='si']"/>
+        <copy-of select="NODE[(@si='←SPRED' or @si='SPRED→')]/@*[name()!='si']"/>
         <attr name="si"><value-of select="@si"/></attr>
         <NODE>
           <copy-of select="@*[name()!='si']"/>
           <attr name="si">cop</attr>
         </NODE>
         <copy-of select="NODE[@si!='←SPRED' and @si!='SPRED→']"/>
-        <apply-templates select="NODE[(@si='←SPRED' or @si='SPRED→') and generate-id(ancestor::NODE[1]) = generate-id(current())]/NODE"/>
+        <apply-templates select="NODE[(@si='←SPRED' or @si='SPRED→')]/NODE"/>
       </copy>
     </template> 
   </def-rule>
@@ -107,6 +107,16 @@
     </template>
   </def-rule>
 
+
+  <def-rule coment="Change the relation of the daughter of the first conjunction that matches in @si to be @conj">
+    <template match="//NODE[@si = ancestor::NODE[1]/@si and ancestor::NODE[1]/NODE[@si='CVP']]">
+      <copy> 
+        <copy-of select="@*[name()!='si']"/>
+        <attr name="si">conj</attr>
+        <apply-templates select="*"/>
+      </copy> 
+    </template>
+  </def-rule>
 
   <def-rule coment="Change the relation of the daughter of the first conjunction that matches in @si to be @conj">
     <template match="//NODE[@si = ancestor::NODE[1]/@si and ancestor::NODE[1]/NODE[@si='CNP']]">
@@ -155,6 +165,16 @@
         </copy>
     </template> 
   </def-rule>
+
+  <def-rule comment="Change relation adverbial modifier of NP">
+    <template match="//NODE[(@si='→N' or @si='N←') and contains(@mi, 'Adv')]">
+        <copy>
+        <attr name="si">advmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
 
   <def-rule comment="Change relation adjectival (not attributive) NP-modifiers">
     <template match="//NODE[@si='→N' and (contains(@mi, 'A|Sg') or contains(@mi, 'A|Pl'))]">
@@ -253,6 +273,15 @@
 
   <def-rule comment="Change relation NPs in oblique cases">
     <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and (contains(@mi, 'N|') or contains(@mi, 'Pron|') or contains(@mi, 'Num|'))]">
+        <copy>
+        <attr name="si">nmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change relation locative adverbial ">
+    <template match="//NODE[@si='←ADVL' or @si='ADVL→' and (contains(@mi, '|Loc') or contains(@mi, '|Ill'))]">
         <copy>
         <attr name="si">nmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -465,6 +494,14 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change subject predicates in essive case">
+    <template match="//NODE[(@si='←SPRED' or @si='SPRED→') and contains(@mi, '|Ess')]">
+        <copy>
+        <attr name="si">xcomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
 
   <def-rule comment="Change for negative verb">
     <template match="//NODE[@lem='ii' and contains(@mi, 'V|IV|Neg')]">
