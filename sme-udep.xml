@@ -41,6 +41,9 @@
           <copy-of select="@*[name()!='si']"/>
           <attr name="si">nummod</attr>
         </NODE>
+        <NODE>
+          <copy-of select="NODE/NODE/@*"/>
+        </NODE>
         <apply-templates select="NODE[contains(@mi, 'Num') and NODE[@si!='Num←']]"/>
         <apply-templates select="NODE[contains(@mi, 'Num')]/NODE"/>
       </copy>
@@ -227,7 +230,7 @@
 
 
   <def-rule comment="Change relation locative NP-modifiers">
-    <template match="//NODE[@si='N←' and (contains(@mi, '|Loc') or contains(@mi, '|Ill'))]">
+    <template match="//NODE[(@si='N←' or @si='Pron←') and (contains(@mi, '|Loc') or contains(@mi, '|Ill'))]">
         <copy>
         <attr name="si">nmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -310,6 +313,15 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation for pronouns depending on pronouns">
+    <template match="//NODE[(@si='Pron←' or @si='→Pron') and contains(@mi,'Pron|')]">
+        <copy>
+        <attr name="si">appos</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change relation apposition">
     <template match="//NODE[contains(@si, 'APP')]">
         <copy>
@@ -369,6 +381,15 @@
     <template match="//NODE[(@si='←OBJ' or @si='OBJ→') and contains(@mi, 'V|')]">
         <copy>
         <attr name="si">ccomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for adverb modifiers of adverbials">
+    <template match="//NODE[(@si='→ADVL' or @si='ADVL←') and contains(@mi, 'Adv')]">
+        <copy>
+        <attr name="si">advmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -487,10 +508,10 @@
   </def-rule>
 
 
-  <!-- Quitar nodos que no tengan lema -->
+  <!-- Quitar nodos que no tengan ord -->
 
   <def-rule comment="">
-    <template match="//NODE[@ord='']">
+    <template match="//NODE[@ord='' or not(@ord)]">
         <apply-templates select="*"/>
     </template> 
   </def-rule>
