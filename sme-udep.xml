@@ -208,6 +208,15 @@
   </def-rule>
 
 
+  <def-rule comment="Change relation locative NP-modifiers">
+    <template match="//NODE[@si='N←' and (contains(@mi, '|Loc') or contains(@mi, '|Ill'))]">
+        <copy>
+        <attr name="si">nmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change relation genitive NP-modifiers">
     <template match="//NODE[@si='→N' and contains(@mi, '|Gen')]">
         <copy>
