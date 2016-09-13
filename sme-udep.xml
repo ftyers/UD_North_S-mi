@@ -182,7 +182,7 @@
   </def-rule>
 
   <def-rule comment="Change relation NPs in oblique cases">
-    <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and (contains(@mi, 'N|') or contains(@mi, 'Pron|'))]">
+    <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and (contains(@mi, 'N|') or contains(@mi, 'Pron|') or contains(@mi, 'Num|'))]">
         <copy>
         <attr name="si">nmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -203,6 +203,15 @@
     <template match="//NODE[@si='→N' and contains(@mi, 'Pron|Dem')]">
         <copy>
         <attr name="si">det</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change relation for adverbs that modify pronouns">
+    <template match="//NODE[@si='→A' and contains(@mi, 'A|Attr')]">
+        <copy>
+        <attr name="si">amod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -248,7 +257,7 @@
   </def-rule>
 
   <def-rule comment="Change relation punctuation">
-    <template match="//NODE[@si='CLB']">
+    <template match="//NODE[@si='CLB' or @si='PUNCT']">
         <copy>
         <attr name="si">punct</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -299,6 +308,15 @@
         <copy>
         <attr name="si">dobj</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Two finite VPs with a comma is parataxis">
+    <template match="NODE[@si='FMV' and ancestor::NODE[@si='FMV'] and not(NODE[@si='CVP'])]">
+        <copy>
+          <attr name="si">parataxis</attr>
+          <apply-templates select="* | @*[name()!='si']"/>
         </copy>
     </template> 
   </def-rule>
