@@ -199,7 +199,7 @@
 
 
   <def-rule comment="A clause with a relative pronoun is @acl:relcl">
-    <template match="//NODE[@si='FS-N←' and contains(NODE/@mi, 'Pron|Rel') or contains(NODE/NODE/@mi, 'Pron|Rel')]">
+    <template match="//NODE[@si='FS-N←' and (contains(NODE/@mi, 'Pron|Rel') or contains(NODE/NODE/@mi, 'Pron|Rel'))]">
         <copy>
         <attr name="si">acl:relcl</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
