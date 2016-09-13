@@ -210,7 +210,7 @@
   </def-rule>
 
   <def-rule comment="Change relation apposition">
-    <template match="//NODE[@si='APP-N←']">
+    <template match="//NODE[contains(@si, 'APP-')]">
         <copy>
         <attr name="si">appos</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
