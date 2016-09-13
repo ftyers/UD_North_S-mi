@@ -14,6 +14,22 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Switch order of numeral and genitive complement">
+    <template match="NODE[contains(@mi, 'Num') and NODE[@si='Num←']]">
+      <copy>
+        <copy-of select="NODE[@si='Num←']/@*[name()!='si']"/>
+        <attr name="si"><value-of select="@si"/></attr>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">nummod</attr>
+        </NODE>
+        <apply-templates select="NODE[contains(@mi, 'Num') and NODE[@si!='Num←']]"/>
+        <apply-templates select="NODE[contains(@mi, 'Num')]/NODE"/>
+      </copy>
+    </template> 
+  </def-rule>
+
+
   <def-rule comment="Switch order of adposition and complement">
     <template match="NODE[(@si='←ADVL' or @si='ADVL→') and NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
       <copy>
@@ -30,16 +46,16 @@
   </def-rule>
 
   <def-rule comment="Switch order of predicate and copula">
-    <template match="NODE[@lem='leat' and NODE[@si='←SPRED' and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
+    <template match="NODE[@lem='leat' and NODE[(@si='←SPRED' or @si='SPRED→') and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
       <copy>
-        <copy-of select="NODE[@si='←SPRED' and generate-id(ancestor::NODE[1]) = generate-id(current())]/@*[name()!='si']"/>
+        <copy-of select="NODE[(@si='←SPRED' or @si='SPRED→') and generate-id(ancestor::NODE[1]) = generate-id(current())]/@*[name()!='si']"/>
         <attr name="si"><value-of select="@si"/></attr>
         <NODE>
           <copy-of select="@*[name()!='si']"/>
           <attr name="si">cop</attr>
         </NODE>
-        <copy-of select="NODE[@si!='←SPRED']"/>
-        <apply-templates select="NODE[@si='←SPRED' and generate-id(ancestor::NODE[1]) = generate-id(current())]/NODE"/>
+        <copy-of select="NODE[@si!='←SPRED' and @si!='SPRED→']"/>
+        <apply-templates select="NODE[(@si='←SPRED' or @si='SPRED→') and generate-id(ancestor::NODE[1]) = generate-id(current())]/NODE"/>
       </copy>
     </template> 
   </def-rule>
@@ -229,8 +245,8 @@
 
 
 
-  <def-rule comment="Change relation 'particle'">
-    <template match="//NODE[@si='PCLE']">
+  <def-rule comment="Change relation 'particles' and interjections">
+    <template match="//NODE[@si='PCLE' or @si='INTERJ']">
         <copy>
         <attr name="si">discourse</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -239,7 +255,7 @@
   </def-rule>
 
   <def-rule comment="Change relation apposition">
-    <template match="//NODE[contains(@si, 'APP-')]">
+    <template match="//NODE[contains(@si, 'APP')]">
         <copy>
         <attr name="si">appos</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
