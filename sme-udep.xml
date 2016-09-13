@@ -228,6 +228,14 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation vocative">
+    <template match="//NODE[@si='VOC']">
+        <copy>
+        <attr name="si">vocative</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
 
   <def-rule comment="Change relation punctuation">
     <template match="//NODE[@si='CLB']">
