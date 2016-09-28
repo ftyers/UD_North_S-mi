@@ -476,6 +476,15 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change for clausal objects attaching to finites">
+    <template match="//NODE[(@si='FS-←OBJ' or @si='FS-OBJ→' or @si='FS-OBJ') and contains(@mi, 'V|')]">
+        <copy>
+        <attr name="si">ccomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change for clausal objects attaching to non-finites">
     <template match="//NODE[(@si='-F←OBJ' or @si='-FOBJ→') and contains(@mi, 'V|')]">
         <copy>
