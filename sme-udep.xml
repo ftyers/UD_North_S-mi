@@ -218,6 +218,14 @@
   </def-rule>
 
 
+  <def-rule comment="A clause with a relative pronoun is @acl:relcl">
+    <template match="//NODE[@si='FS-N←' and (NODE[contains(@mi, 'Pron|Rel')] or NODE/NODE[contains(@mi, 'Pron|Rel')])]">
+        <copy>
+        <attr name="si">acl:relcl</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
 
   <def-rule comment="A finite verb clause headed by a speech verb is @ccomp">
     <template match="//NODE[@si = 'FMV' and ancestor::NODE[1][@si='FMVdic']]">
@@ -361,15 +369,6 @@
   </def-rule>
 
 
-
-  <def-rule comment="A clause with a relative pronoun is @acl:relcl">
-    <template match="//NODE[@si='FS-N←' and (contains(NODE/@mi, 'Pron|Rel') or contains(NODE/NODE/@mi, 'Pron|Rel'))]">
-        <copy>
-        <attr name="si">acl:relcl</attr>
-        <apply-templates select="@*[name()!='si'] | *"/>
-        </copy>
-    </template> 
-  </def-rule>
 
 
   <def-rule comment="Change relation locative NP-modifiers">
