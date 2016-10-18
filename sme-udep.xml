@@ -791,7 +791,8 @@
   </def-rule>
 
   <def-rule comment="If you have a structure VP , VP with no explicit coordination, go with parataxis">
-    <template match="//NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV') and ancestor::NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV')] and ancestor::NODE/NODE[@lem=',']]">
+    <!--<template match="//NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV') and ancestor::NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si='FMVdic')] and ancestor::NODE/NODE[@lem=',']]">-->
+    <template match="//NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV') and ancestor::NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si='FMVdic')]]">
         <copy>
         <attr name="si">parataxis</attr>
         <apply-templates select="* | @*[name()!='si']"/>
