@@ -288,7 +288,7 @@
   </def-rule>
 
   <def-rule comment="Change relation adverbial modifier of NP">
-    <template match="//NODE[(@si='→N' or @si='N←') and contains(@mi, 'Adv')]">
+    <template match="//NODE[(@si='→N' or @si='N←') and (@mi='Adv' or contains(@mi, 'Adv|'))]">
         <copy>
         <attr name="si">advmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -413,7 +413,7 @@
   </def-rule>
 
   <def-rule comment="Change relation adverb adverbial ">
-    <template match="//NODE[@si='←ADVL' or @si='ADVL→' and contains(@mi, 'Adv')]">
+    <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and (@mi='Adv' or contains(@mi, 'Adv|'))]">
         <copy>
         <attr name="si">advmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
@@ -647,7 +647,7 @@
   </def-rule>
 
   <def-rule comment="Change for adverb modifiers of adverbials">
-    <template match="//NODE[(@si='→ADVL' or @si='ADVL←') and contains(@mi, 'Adv')]">
+    <template match="//NODE[(@si='→ADVL' or @si='ADVL←') and (@mi='Adv' or contains(@mi, 'Adv|'))]">
         <copy>
         <attr name="si">advmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
