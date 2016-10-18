@@ -38,6 +38,22 @@
   </def-rule>
 
   <def-rule comment="Change for clausal objects which are auxiliaries with main verb dependent attaching to finites">
+    <template match="//NODE[(@si='FS-VFIN←' or @si='FS-→VFIN' or @si='FS-VFIN') and contains(@mi, 'V|') and NODE[@si='FS-IMV']]">
+      <copy>
+        <copy-of select="NODE[@si='FS-IMV']/@*[name()!='si']"/>
+        <attr name="si"><value-of select="@si"/></attr>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si!='FS-IMV']"/>
+        <apply-templates select="NODE[@si='FS-IMV']/NODE"/>
+      </copy>
+
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for clausal objects which are auxiliaries with main verb dependent attaching to finites">
     <template match="//NODE[(@si='FS-←OBJ' or @si='FS-OBJ→' or @si='FS-OBJ') and contains(@mi, 'V|') and NODE[@si='FS-IMV']]">
       <copy>
         <copy-of select="NODE[@si='FS-IMV']/@*[name()!='si']"/>
@@ -68,8 +84,6 @@
 
     </template> 
   </def-rule>
-
-
 
   <def-rule comment="Change for clausal objects which are auxiliaries with main verb dependent attaching to finites">
     <template match="//NODE[(@si='FS-←ADVL' or @si='FS-ADVL→' or @si='FS-ADVL') and contains(@mi, 'V|') and NODE[@si='FS-IMV']]">
