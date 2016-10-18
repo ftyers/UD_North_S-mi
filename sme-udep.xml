@@ -12,6 +12,7 @@
           <copy-of select="@*[name()!='si']"/>
           <attr name="si">aux</attr>
         </NODE>
+        <apply-templates select="NODE[@si='IAUX']/*[@si!='IMV']"/>
         <apply-templates select="NODE[@si!='IAUX']"/>
         <NODE>
           <copy-of select="NODE[@si='IAUX']/@*[name()!='si']"/>
@@ -36,6 +37,59 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change for clausal objects which are auxiliaries with main verb dependent attaching to finites">
+    <template match="//NODE[(@si='FS-←OBJ' or @si='FS-OBJ→' or @si='FS-OBJ') and contains(@mi, 'V|') and NODE[@si='FS-IMV']]">
+      <copy>
+        <copy-of select="NODE[@si='FS-IMV']/@*[name()!='si']"/>
+        <attr name="si">ccomp</attr>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si!='FS-IMV']"/>
+        <apply-templates select="NODE[@si='FS-IMV']/NODE"/>
+      </copy>
+
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for clausal objects which are auxiliaries with main verb dependent attaching to nouns">
+    <template match="//NODE[(@si='FS-N←' or @si='FS-→N' or @si='FS-N') and NODE[(@si='FS-IMV' or @si='IMV' or @si='FS-N←IMV')]]">
+      <copy>
+        <copy-of select="NODE[(@si='FS-IMV' or @si='IMV' or @si='FS-N←IMV')]/@*[name()!='si']"/>
+        <attr name="si">acl:relcl</attr>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si!='FS-IMV'][@si!='IMV'][@si!='FS-N←IMV']"/>
+        <apply-templates select="NODE[(@si='FS-IMV' or @si='IMV' or @si='FS-N←IMV')]/NODE"/>
+      </copy>
+
+    </template> 
+  </def-rule>
+
+
+
+  <def-rule comment="Change for clausal objects which are auxiliaries with main verb dependent attaching to finites">
+    <template match="//NODE[(@si='FS-←ADVL' or @si='FS-ADVL→' or @si='FS-ADVL') and contains(@mi, 'V|') and NODE[@si='FS-IMV']]">
+      <copy>
+        <copy-of select="NODE[@si='FS-IMV']/@*[name()!='si']"/>
+        <attr name="si">advcl</attr>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si!='FS-IMV']"/>
+        <apply-templates select="NODE[@si='FS-IMV']/NODE"/>
+      </copy>
+
+    </template> 
+  </def-rule>
+
+
+
+  <!-- [leat [[sullii] 50 [olbmo]] [boahtán]] -->
   <def-rule comment="Switch order of numeral and genitive complement">
     <template match="NODE[contains(@mi, 'Num') and NODE[@si='Num←']]">
       <copy>
@@ -44,12 +98,13 @@
         <NODE>
           <copy-of select="@*[name()!='si']"/>
           <attr name="si">nummod</attr>
+          <apply-templates select=".//NODE[@si='→Num']"/>
         </NODE>
         <NODE>
           <copy-of select="NODE/NODE/@*"/>
         </NODE>
         <apply-templates select="NODE[contains(@mi, 'Num') and NODE[@si!='Num←']]"/>
-        <apply-templates select="NODE[contains(@mi, 'Num')]/NODE"/>
+        <apply-templates select=".//NODE[@si!='Num←' and @si!='→Num']"/>
       </copy>
     </template> 
   </def-rule>
@@ -68,7 +123,7 @@
   </def-rule>
 
   <def-rule comment="Switch order of adposition and complement">
-    <template match="NODE[(@si='←ADVL' or @si='ADVL→') and NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
+    <template match="NODE[(@si='←ADVL' or @si='ADVL→' or @si='ADVL') and NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]]">
       <copy>
         <copy-of select="NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]/@*"/>
         <!--<attr name="si">nmod</attr>--> <!-- When there is coordination "Dubmejehkos..." -->
@@ -78,21 +133,6 @@
         </NODE>
         <copy-of select="NODE[@si!='→P' and @si !='P←']"/>
         <apply-templates select="NODE[(@si='→P' or @si='P←') and generate-id(ancestor::NODE[1]) = generate-id(current())]/NODE"/>
-      </copy>
-    </template> 
-  </def-rule>
-
-  <def-rule comment="Switch order of predicate and copula">
-    <template match="NODE[@lem='leat' and NODE[(@si='←SPRED' or @si='SPRED→')]]">
-      <copy>
-        <copy-of select="NODE[(@si='←SPRED' or @si='SPRED→')]/@*[name()!='si']"/>
-        <attr name="si"><value-of select="@si"/></attr>
-        <NODE>
-          <copy-of select="@*[name()!='si']"/>
-          <attr name="si">cop</attr>
-        </NODE>
-        <copy-of select="NODE[@si!='←SPRED' and @si!='SPRED→']"/>
-        <apply-templates select="NODE[(@si='←SPRED' or @si='SPRED→')]/NODE"/>
       </copy>
     </template> 
   </def-rule>
@@ -118,6 +158,20 @@
     </template>
   </def-rule>
 
+  <def-rule comment="Change for preconjunctions">
+    <template match="//NODE[@si='CNP' and NODE[@si='→CC']]">
+        <copy>
+          <NODE>
+          <copy-of select="@*"/>
+          </NODE>
+          <NODE>
+          <copy-of select="NODE/@*[name()!='si']"/>
+          <attr name="si">cc:preconj</attr>
+          </NODE>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule coment="Change the relation of the daughter of the first conjunction that matches in @si to be @conj">
     <template match="//NODE[@si = ancestor::NODE[1]/@si and ancestor::NODE[1]/NODE[@si='CNP']]">
       <copy> 
@@ -127,6 +181,23 @@
       </copy> 
     </template>
   </def-rule>
+
+
+  <def-rule comment="Switch order of predicate and copula">
+    <template match="NODE[@lem='leat' and NODE[(@si='←SPRED' or @si='SPRED→')]]">
+      <copy>
+        <copy-of select="NODE[(@si='←SPRED' or @si='SPRED→')]/@*[name()!='si']"/>
+        <attr name="si"><value-of select="@si"/></attr>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">cop</attr>
+        </NODE>
+        <copy-of select="NODE[@si!='←SPRED' and @si!='SPRED→']"/>
+        <apply-templates select="NODE[(@si='←SPRED' or @si='SPRED→')]/NODE"/>
+      </copy>
+    </template> 
+  </def-rule>
+
 
 
   <def-rule comment="A finite verb clause headed by a speech verb is @ccomp">
@@ -161,6 +232,15 @@
     <template match="//NODE[@si='CVP' and @mi='CS']">
         <copy>
         <attr name="si">mark</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change relation separated compound">
+    <template match="//NODE[(@si='→N' or @si='N←') and contains(@mi, '|RCmpnd')]">
+        <copy>
+        <attr name="si">compound</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -206,13 +286,23 @@
   </def-rule>
 
   <def-rule comment="Change relation attributive NP-modifiers">
-    <template match="//NODE[@si='→N' and contains(@mi, 'N|ABBR') and NODE/@si='flat']">
+    <template match="//NODE[(@si='→N' or @si='N←') and contains(@mi, 'N|ABBR') and NODE/@si='flat']">
         <copy>
         <attr name="si">flat</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
   </def-rule>
+
+  <def-rule comment="Change relation attributive NP-modifiers">
+    <template match="//NODE[@si='N←' and contains(@mi, 'N|ABBR') and ancestor::NODE[1]/NODE[@si='flat']]">
+        <copy>
+        <attr name="si">flat</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
 
 
   <def-rule comment="Change relation attributive NP-modifiers">
@@ -271,6 +361,15 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation for infinitives ad adverbials">
+    <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and contains(@mi, 'V|')]">
+        <copy>
+        <attr name="si">advcl</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change relation NPs in oblique cases">
     <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and (contains(@mi, 'N|') or contains(@mi, 'Pron|') or contains(@mi, 'Num|'))]">
         <copy>
@@ -293,6 +392,15 @@
     <template match="//NODE[@si='←ADVL' or @si='ADVL→' and contains(@mi, 'Adv')]">
         <copy>
         <attr name="si">advmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change relation verbal genitive">
+    <template match="//NODE[@si='←ADVL' or @si='ADVL→' and contains(@mi, '|VGen')]">
+        <copy>
+        <attr name="si">advcl</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -355,6 +463,24 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation for nouns depending on pronouns">
+    <template match="//NODE[(@si='Pron←' or @si='→Pron') and contains(@mi,'N|')]">
+        <copy>
+        <attr name="si">appos</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change relation for adjectives depending on pronouns">
+    <template match="//NODE[(@si='Pron←' or @si='→Pron') and contains(@mi,'A|')]">
+        <copy>
+        <attr name="si">amod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change relation apposition">
     <template match="//NODE[contains(@si, 'APP')]">
         <copy>
@@ -382,6 +508,36 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation for non-finite clausal objects"> <!-- TODO: xcomp/ccomp -->
+    <template match="//NODE[@si='ICL-OBJ']">
+        <copy>
+        <attr name="si">ccomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
+  <def-rule comment="Change relation for finite clausal subjects">
+    <template match="//NODE[@si='FS-SUBJ']">
+        <copy>
+        <attr name="si">csubj</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
+  <def-rule comment="Change relation for non-finite clausal subjects">
+    <template match="//NODE[@si='ICL-SUBJ']">
+        <copy>
+        <attr name="si">csubj</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
   <def-rule comment="Change relation for clausal subjects">
     <template match="//NODE[(@si='SUBJ→' or @si='←SUBJ') and contains(@mi, 'V|')]">
         <copy>
@@ -396,6 +552,15 @@
     <template match="//NODE[(@si='SUBJ→' or @si='←SUBJ') and not(contains(@mi, 'V|'))]">
         <copy>
         <attr name="si">nsubj</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change for preposition complements which are derived verbs">
+    <template match="//NODE[(@si='P←' or @si='→P') and contains(@mi, 'V|') ]">
+        <copy>
+        <attr name="si">advcl</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -512,6 +677,25 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change object predicates in essive case">
+    <template match="//NODE[(@si='←OPRED' or @si='OPRED→') and contains(@mi, '|Ess')]">
+        <copy>
+        <attr name="si">xcomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change predicate predicates">
+    <template match="//NODE[(@si='←PPRED' or @si='PPRED→')]">
+        <copy>
+        <attr name="si">xcomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
   <def-rule comment="Change for negative verb">
     <template match="//NODE[@lem='ii' and contains(@mi, 'V|IV|Neg')]">
         <copy>
@@ -535,6 +719,15 @@
         <copy>
           <attr name="si">parataxis</attr>
           <apply-templates select="* | @*[name()!='si']"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="If you have a structure with a noun fragment, go with parataxis">
+    <template match="//NODE[@si='HNOUN' and ancestor::NODE[(@si='IMV' or @si = 'FMV' or @si = 'HNOUN')]]">
+        <copy>
+        <attr name="si">parataxis</attr>
+        <apply-templates select="* | @*[name()!='si']"/>
         </copy>
     </template> 
   </def-rule>
