@@ -351,6 +351,16 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation attributive participles"> <!-- CHECK: acl:relcl? -->
+    <template match="//NODE[(@si='→N' or @si='N←') and contains(@mi, '|Inf')]">
+        <copy>
+        <attr name="si">acl</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
 
   <def-rule comment="A clause with a relative pronoun is @acl:relcl">
     <template match="//NODE[@si='FS-N←' and (contains(NODE/@mi, 'Pron|Rel') or contains(NODE/NODE/@mi, 'Pron|Rel'))]">
@@ -389,6 +399,15 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change relation adverb adverbial ">
+    <template match="//NODE[@si='←ADVL' or @si='ADVL→' and contains(@mi, 'Adv')]">
+        <copy>
+        <attr name="si">advmod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
   <def-rule comment="Change relation NPs in oblique cases">
     <template match="//NODE[(@si='←ADVL' or @si='ADVL→') and (contains(@mi, 'N|') or contains(@mi, 'Pron|') or contains(@mi, 'Num|'))]">
         <copy>
@@ -402,15 +421,6 @@
     <template match="//NODE[@si='←ADVL' or @si='ADVL→' and (contains(@mi, '|Loc') or contains(@mi, '|Ill'))]">
         <copy>
         <attr name="si">nmod</attr>
-        <apply-templates select="@*[name()!='si'] | *"/>
-        </copy>
-    </template> 
-  </def-rule>
-
-  <def-rule comment="Change relation adverb adverbial ">
-    <template match="//NODE[@si='←ADVL' or @si='ADVL→' and contains(@mi, 'Adv')]">
-        <copy>
-        <attr name="si">advmod</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -451,6 +461,26 @@
         </copy>
     </template> 
   </def-rule>
+
+
+  <def-rule comment="Change relation for attributives that modify numerals">
+    <template match="//NODE[@si='→Num' and contains(@mi, '|Attr')]">
+        <copy>
+        <attr name="si">compound</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change relation for attributives that modify numerals">
+    <template match="//NODE[(@si='→Num' or @si='→A') and contains(@mi, '|Gen')]">
+        <copy>
+        <attr name="si">nmod:poss</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
 
 
   <def-rule comment="Change relation for adverbs that modify non-verbs/nominals">
@@ -770,7 +800,7 @@
   </def-rule>
 
   <def-rule comment="Relabel the root relation">
-    <template match="//SENTENCE/NODE[@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si = 'FMVdic']">
+    <template match="//SENTENCE/NODE[@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si = 'FMVdic' or @si='FS-VFIN←']">
         <copy>
         <attr name="si">root</attr>
         <apply-templates select="* | @*[name()!='si']"/>
