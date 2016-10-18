@@ -158,6 +158,25 @@
     </template>
   </def-rule>
 
+  <!-- eambbo go logi jagi -->
+  <def-rule comment="Switch order of subordinating conjunction in comparison complement">
+    <template match="NODE[@si='CNP' and NODE[@si='COMP-CS←']]">
+      <copy>
+        <copy-of select="NODE[@si='COMP-CS←']/@*[name()!='si']"/>
+        <attr name="si">advcl</attr>
+        <NODE> 
+          <apply-templates select=".//NODE[@si!='CNP' and @si!='COMP-CS←']"/>
+        </NODE> 
+        <NODE> 
+          <copy-of select="@*[name()!='si']"/>
+        <attr name="si">mark</attr>
+        </NODE> 
+      </copy>
+    </template> 
+  </def-rule>
+
+
+
   <def-rule comment="Change for preconjunctions">
     <template match="//NODE[@si='CNP' and NODE[@si='→CC']]">
         <copy>
@@ -668,8 +687,17 @@
     </template> 
   </def-rule>
 
-  <def-rule comment="Change subject predicates in essive case">
-    <template match="//NODE[(@si='←SPRED' or @si='SPRED→') and contains(@mi, '|Ess')]">
+  <def-rule comment="Change subject predicates in essive or nominative case">
+    <template match="//NODE[(@si='←SPRED' or @si='SPRED→' or @si='SPRED') and (contains(@mi, '|Ess') or contains(@mi, '|Nom'))]">
+        <copy>
+        <attr name="si">xcomp</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+  <def-rule comment="Change subject predicates for numeral phrases">
+    <template match="//NODE[(@si='←SPRED' or @si='SPRED→' or @si='SPRED') and contains(@mi, '|Gen') and NODE[contains(@mi, 'Num|')]]">
         <copy>
         <attr name="si">xcomp</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
