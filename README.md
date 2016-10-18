@@ -6,7 +6,9 @@ Files:
 
 Prerequisites:
 
-* ```vislcg3``
+* ```vislcg3```
+* ```matxin```
+* ```ud-scripts```
 
 Using this stuff:
 
@@ -23,4 +25,28 @@ Apply the dependency parser to the corpus:
 
 ```
    cat functionsCG.corr.txt | vislcg3 --grammar dependency.cg3 > functionsCG.dep.txt
+```
+
+You can compile the ```sme-udep.xml``` file using ```matxin-preprocess-transfer```:
+
+```
+  matxin-preprocess-transfer sme-udep.xml sme-udep.bin
+```
+
+Then convert the annotated corpus to Matxin XML:
+
+```
+  cat functionsCG.dep.txt | vislcg3-to-conllu.py | conllu-to-matxin.py > functionsCG.dep.xml
+```
+
+And apply the transformations:
+
+```
+  cat functionsCG.dep.xml | matxin-transfer sme-udep.bin > functionsCG.u-dep.xml
+```
+
+And then convert to CoNLL-U:
+
+```
+  cat functionsCG.u-dep.xml | matxin-to-conllu.py > sme-ud-train.conllu
 ```
