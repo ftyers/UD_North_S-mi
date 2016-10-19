@@ -24,7 +24,7 @@ You will need the dependency parser from:
 Apply the dependency parser to the corpus:
 
 ```
-   cat functionsCG.corr.txt | vislcg3 --grammar dependency.cg3 > functionsCG.dep.txt
+   cat functionsCG.corr.txt | vislcg3 --grammar dependency.cg3 | sed 's/CLB #/CLB @CLB #/g' > functionsCG.dep.txt
 ```
 
 You can compile the ```sme-udep.xml``` file using ```matxin-preprocess-transfer```:

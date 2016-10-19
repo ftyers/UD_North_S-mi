@@ -3,9 +3,32 @@
      dependency trees in Giellatekno format to Universal Dependencies.
 -->
 <transfer>
+  <def-rule comment="Switch order with chained auxiliaries and main verb">
+    <template match="NODE[(@si='FAUX' or @si='S←') and NODE[@si='IAUX' and NODE[@si='IAUX' and NODE[@si='IMV']]]]">
+      <copy>
+        <copy-of select="NODE[@si='IAUX']/NODE[@si='IAUX']/NODE[@si='IMV']/@*"/>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si='IAUX']/*[@si!='IAUX']"/>
+        <apply-templates select="NODE[@si!='IAUX']"/>
+        <NODE>
+          <copy-of select="NODE[@si='IAUX']/NODE[@si='IAUX']/@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <NODE>
+          <copy-of select="NODE[@si='IAUX']/@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si='IAUX']/NODE[@si='IAUX']/NODE[@si='IMV']/NODE"/>
+      </copy>
+    </template> 
+  </def-rule>
+
 
   <def-rule comment="Switch order with chained auxiliaries and main verb">
-    <template match="NODE[@si='FAUX' and NODE[@si='IAUX' and NODE[@si='IMV']]]">
+    <template match="NODE[(@si='FAUX' or @si='S←') and NODE[@si='IAUX' and NODE[@si='IMV']]]">
       <copy>
         <copy-of select="NODE[@si='IAUX']/NODE[@si='IMV']/@*"/>
         <NODE>
@@ -22,6 +45,28 @@
       </copy>
     </template> 
   </def-rule>
+
+  <!-- This deals with a parsing error where the final verb is IAUX -->
+  <def-rule comment="Switch order with chained auxiliaries and main verb">
+    <template match="NODE[@si='FAUX' and NODE[(@si='IAUX' and @lem='leat') and NODE[(@si='IAUX' and contains(@mi,'|PrfPrc'))]]]">
+      <copy>
+        <copy-of select="NODE[@si='IAUX']/NODE[@si='IAUX']/@*"/>
+        <NODE>
+          <copy-of select="@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si='IAUX']/*[@si!='IAUX']"/>
+        <apply-templates select="NODE[@si!='IAUX']"/>
+        <NODE>
+          <copy-of select="NODE[@si='IAUX']/@*[name()!='si']"/>
+          <attr name="si">aux</attr>
+        </NODE>
+        <apply-templates select="NODE[@si='IAUX']/NODE[@si='IAUX']/NODE"/>
+      </copy>
+    </template> 
+  </def-rule>
+
+
 
   <def-rule comment="Switch order of auxiliary and main verb">
     <template match="NODE[@si='FAUX' and NODE[@si='IMV']]">
@@ -804,7 +849,6 @@
   </def-rule>
 
   <def-rule comment="If you have a structure VP , VP with no explicit coordination, go with parataxis">
-    <!--<template match="//NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV') and ancestor::NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si='FMVdic')] and ancestor::NODE/NODE[@lem=',']]">-->
     <template match="//NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV') and ancestor::NODE[(@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si='FMVdic')]]">
         <copy>
         <attr name="si">parataxis</attr>
@@ -814,7 +858,7 @@
   </def-rule>
 
   <def-rule comment="Relabel the root relation">
-    <template match="//SENTENCE/NODE[@si='IMV' or @si='HNOUN' or @si = 'FMV' or @si = 'FMVdic' or @si='FS-VFIN←']">
+    <template match="//SENTENCE/NODE[@si='IMV' or @si='IAUX' or @si='HNOUN' or @si = 'FMV' or @si = 'FMVdic' or @si='FS-VFIN←']">
         <copy>
         <attr name="si">root</attr>
         <apply-templates select="* | @*[name()!='si']"/>
