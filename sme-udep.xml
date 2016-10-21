@@ -380,6 +380,16 @@
     </template> 
   </def-rule>
 
+  <def-rule comment="Change for nouns derived with -laš">
+    <template match="//NODE[(@si='→N' or @si='→A' or @si='→Num') and contains(@mi, '|A|Attr')]">
+        <copy>
+        <attr name="si">amod</attr>
+        <apply-templates select="@*[name()!='si'] | *"/>
+        </copy>
+    </template> 
+  </def-rule>
+
+
   <def-rule comment="Change for demonstrative pronouns">
     <template match="//NODE[(@si='→N' or @si='→A' or @si='→Num') and (contains(@mi, 'Pron|Dem') or contains(@mi, '|Attr'))]">
         <copy>
