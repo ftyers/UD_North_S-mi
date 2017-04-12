@@ -1,121 +1,121 @@
-_	N	Prop	_	PROPN	_
-_	_	ABBR	_	_	_
-_	_	Acc	_	_	Case=Acc
-_	_	ACR	_	_	_
-_	_	Actio	_	_	VerbForm=Ger
-_	_	Allegro	_	_	_
-_	_	Attr	_	_	_
-_	_	Coll	_	_	PronType=Coll
-_	_	Com	_	_	Case=Com
-_	_	Comp	_	_	Degree=Comp
-_	_	Cond	_	_	Mood=Cond
-_	_	ConNeg	_	_	VerbForm=ConNeg
-_	_	Dem	_	_	PronType=Dem
-_	_	Der/A*	_	_	_	
-_	_	Der/ahtti	_	_	_
-_	_	Der/alla	_	_	_
-_	_	Der/asti	_	_	_
-_	_	Der/at	_	_	_
-_	_	Der/d	_	_	_
-_	_	Der/Dimin	_	_	_
-_	_	Der/easti	_	_	_
-_	_	Der/geahtes	_	_	_
-_	_	Der/goahti	_	_	_
-_	_	Der/h	_	_	_
-_	_	Der/heapmi	_	_	_
-_	_	Der/l	_	_	_
-_	_	Der/las	_	_	_
-_	N*	Der/laš	_	ADJ	_	_
-_	_	Der/muš	_	_	_
-_	_	Der/NomAct	_	_	_
-_	_	Der/NomAg	_	_	_
-_	V*	Der/PassL	_	VERB	Voice=Pass
-_	V*	Der/PassS	_	VERB	Voice=Pass
-_	_	Der/saš	_	_	_
-_	_	Der/st	_	_	_
-_	_	Der/t	_	_	_
-_	_	Der/vuohta	_	_	_
-_	_	Du	_	_	Number=Dual
-_	_	Du1	_	_	Number=Dual|Person=1
-_	_	Du2	_	_	Number=Dual|Person=2
-_	_	Du3	_	_	Number=Dual|Person=3
-_	_	Ess	_	_	Case=Ess
-_	_	Foc/ba	_	_	_
-_	_	Foc/bat	_	_	_
-_	_	Foc/be	_	_	_
-_	_	Foc/ge	_	_	_
-_	_	Foc/ges	_	_	_
-_	_	Foc/han	_	_	_
-_	_	Foc/naj	_	_	_
-_	_	G3	_	_	_	
-_	_	G7	_	_	_	
-_	_	Gen	_	_	Case=Gen
-_	_	Ger	_	_	VerbForm=Ger
-_	_	Ill	_	_	Case=Ill
-_	_	Imprt	_	_	Mood=Imprt
-_	_	Ind	_	_	Mood=Ind
-_	_	Indef	_	_	PronType=Indef
-_	_	Inf	_	_	VerbForm=Inf
-_	_	Interr	_	_	PronType=Interr
-_	_	IV	_	_	_
-_	_	LEFT	_	_	_
-_	_	Loc	_	_	Case=Loc
-_	_	Neg	_	_	Polarity=Neg
-_	_	Nom	_	_	Case=Nom
-_	_	NomAg	_	_	_
-_	_	Ord	_	_	NumType=Ord
-_	_	Pers	_	_	PronType=Pers
-_	_	Pl	_	_	Number=Plur
-_	_	Pl1	_	_	Number=Plur|Person=1
-_	_	Pl2	_	_	Number=Plur|Person=2
-_	_	Pl3	_	_	Number=Plur|Person=3
-_	_	Pot	_	_	Mood=Pot
-_	_	PrfPrc	_	_	VerbForm=Part|Aspect=Perf
-_	_	Prs	_	_	Tense=Pres
-_	_	PrsPrc	_	_	VerbForm=Part|Tense=Pres
-_	_	Prt	_	_	Tense=Past
-_	_	PxDu1	_	_	Number[psor]=Dual|Person[psor]=1
-_	_	PxDu2	_	_	Number[psor]=Dual|Person[psor]=2
-_	_	PxDu3	_	_	Number[psor]=Dual|Person[psor]=3
-_	_	PxPl1	_	_	Number[psor]=Plur|Person[psor]=1
-_	_	PxPl2	_	_	Number[psor]=Plur|Person[psor]=2
-_	_	PxPl3	_	_	Number[psor]=Plur|Person[psor]=3
-_	_	PxSg1	_	_	Number[psor]=Sing|Person[psor]=1
-_	_	PxSg2	_	_	Number[psor]=Sing|Person[psor]=2
-_	_	PxSg3	_	_	Number[psor]=Sing|Person[psor]=3
-_	_	Qst	_	_	_
-_	_	RCmpnd	_	_	_
-_	_	Recipr	_	_	PronType=Recip
-_	_	Refl	_	_	PronType=Refl
-_	_	Rel	_	_	PronType=Rel
-_	_	RIGHT	_	_	_
-_	_	Sg	_	_	Number=Sing
-_	_	Sg1	_	_	Number=Sing|Person=1
-_	_	Sg2	_	_	Number=Sing|Person=2
-_	_	Sg3	_	_	Number=Sing|Person=3
-_	_	SgCmp	_	_	_
-_	_	SgGenCmp	_	_	_
-_	_	SgNomCmp	_	_	_
-_	_	Sup	_	_	_
-_	_	Superl	_	_	Degree=Sup
-_	_	TV	_	_	_
-_	_	VAbess	_	_	VerbForm=Ger|Case=Abe
-_	_	VGen	_	_	VerbForm=Ger|Case=Gen
-_	A	_	_	ADJ	_
-_	Adv	_	_	ADV	_
-_	CC	_	_	CCONJ	_
-_	CLB	_	_	PUNCT	_
-_	CS	_	_	SCONJ	_
-_	Interj	_	_	INTJ	_
-_	N	_	_	NOUN	_
-_	Num	_	_	NUM	_
-_	Pcle	_	_	PART	_
-_	Po	_	_	ADP	_
-_	Pr	_	_	ADP	_
-_	Pron	_	_	PRON	_
-_	PUNCT	_	_	PUNCT	_
-_	V	_	_	VERB	_
-_	A*	_	_	A*	_
-_	N*	_	_	N*	_
-_	V*	_	_	V*	_
-_	_	Adv	_	_	Adv
+_	N	Prop	_	_	PROPN	_	_
+_	_	ABBR	_	_	_	_	_
+_	_	Acc	_	_	_	Case=Acc	_
+_	_	ACR	_	_	_	_	_
+_	_	Actio	_	_	_	VerbForm=Ger	_
+_	_	Allegro	_	_	_	_	_
+_	_	Attr	_	_	_	_	_
+_	_	Coll	_	_	_	PronType=Coll	_
+_	_	Com	_	_	_	Case=Com	_
+_	_	Comp	_	_	_	Degree=Comp	_
+_	_	Cond	_	_	_	Mood=Cond	_
+_	_	ConNeg	_	_	_	VerbForm=ConNeg	_
+_	_	Dem	_	_	_	PronType=Dem	_
+_	_	Der/A*	_	_	_	_	
+_	_	Der/ahtti	_	_	_	_	_
+_	_	Der/alla	_	_	_	_	_
+_	_	Der/asti	_	_	_	_	_
+_	_	Der/at	_	_	_	_	_
+_	_	Der/d	_	_	_	_	_
+_	_	Der/Dimin	_	_	_	_	_
+_	_	Der/easti	_	_	_	_	_
+_	_	Der/geahtes	_	_	_	_	_
+_	_	Der/goahti	_	_	_	_	_
+_	_	Der/h	_	_	_	_	_
+_	_	Der/heapmi	_	_	_	_	_
+_	_	Der/l	_	_	_	_	_
+_	_	Der/las	_	_	_	_	_
+_	N*	Der/laš	_	_	ADJ	_	_
+_	_	Der/muš	_	_	_	_	_
+_	_	Der/NomAct	_	_	_	_	_
+_	_	Der/NomAg	_	_	_	_	_
+_	V*	Der/PassL	_	_	VERB	Voice=Pass	_
+_	V*	Der/PassS	_	_	VERB	Voice=Pass	_
+_	_	Der/saš	_	_	_	_	_
+_	_	Der/st	_	_	_	_	_
+_	_	Der/t	_	_	_	_	_
+_	_	Der/vuohta	_	_	_	_	_
+_	_	Du	_	_	_	Number=Dual	_
+_	_	Du1	_	_	_	Number=Dual|Person=1	_
+_	_	Du2	_	_	_	Number=Dual|Person=2	_
+_	_	Du3	_	_	_	Number=Dual|Person=3	_
+_	_	Ess	_	_	_	Case=Ess	_
+_	_	Foc/ba	_	_	_	_	_
+_	_	Foc/bat	_	_	_	_	_
+_	_	Foc/be	_	_	_	_	_
+_	_	Foc/ge	_	_	_	_	_
+_	_	Foc/ges	_	_	_	_	_
+_	_	Foc/han	_	_	_	_	_
+_	_	Foc/naj	_	_	_	_	_
+_	_	G3	_	_	_	_	
+_	_	G7	_	_	_	_	
+_	_	Gen	_	_	_	Case=Gen	_
+_	_	Ger	_	_	_	VerbForm=Ger	_
+_	_	Ill	_	_	_	Case=Ill	_
+_	_	Imprt	_	_	_	Mood=Imprt	_
+_	_	Ind	_	_	_	Mood=Ind	_
+_	_	Indef	_	_	_	PronType=Indef	_
+_	_	Inf	_	_	_	VerbForm=Inf	_
+_	_	Interr	_	_	_	PronType=Interr	_
+_	_	IV	_	_	_	_	_
+_	_	LEFT	_	_	_	_	_
+_	_	Loc	_	_	_	Case=Loc	_
+_	_	Neg	_	_	_	Polarity=Neg	_
+_	_	Nom	_	_	_	Case=Nom	_
+_	_	NomAg	_	_	_	_	_
+_	_	Ord	_	_	_	NumType=Ord	_
+_	_	Pers	_	_	_	PronType=Pers	_
+_	_	Pl	_	_	_	Number=Plur	_
+_	_	Pl1	_	_	_	Number=Plur|Person=1	_
+_	_	Pl2	_	_	_	Number=Plur|Person=2	_
+_	_	Pl3	_	_	_	Number=Plur|Person=3	_
+_	_	Pot	_	_	_	Mood=Pot	_
+_	_	PrfPrc	_	_	_	VerbForm=Part|Aspect=Perf	_
+_	_	Prs	_	_	_	Tense=Pres	_
+_	_	PrsPrc	_	_	_	VerbForm=Part|Tense=Pres	_
+_	_	Prt	_	_	_	Tense=Past	_
+_	_	PxDu1	_	_	_	Number[psor]=Dual|Person[psor]=1	_
+_	_	PxDu2	_	_	_	Number[psor]=Dual|Person[psor]=2	_
+_	_	PxDu3	_	_	_	Number[psor]=Dual|Person[psor]=3	_
+_	_	PxPl1	_	_	_	Number[psor]=Plur|Person[psor]=1	_
+_	_	PxPl2	_	_	_	Number[psor]=Plur|Person[psor]=2	_
+_	_	PxPl3	_	_	_	Number[psor]=Plur|Person[psor]=3	_
+_	_	PxSg1	_	_	_	Number[psor]=Sing|Person[psor]=1	_
+_	_	PxSg2	_	_	_	Number[psor]=Sing|Person[psor]=2	_
+_	_	PxSg3	_	_	_	Number[psor]=Sing|Person[psor]=3	_
+_	_	Qst	_	_	_	_	_
+_	_	RCmpnd	_	_	_	_	_
+_	_	Recipr	_	_	_	PronType=Recip	_
+_	_	Refl	_	_	_	PronType=Refl	_
+_	_	Rel	_	_	_	PronType=Rel	_
+_	_	RIGHT	_	_	_	_	_
+_	_	Sg	_	_	_	Number=Sing	_
+_	_	Sg1	_	_	_	Number=Sing|Person=1	_
+_	_	Sg2	_	_	_	Number=Sing|Person=2	_
+_	_	Sg3	_	_	_	Number=Sing|Person=3	_
+_	_	SgCmp	_	_	_	_	_
+_	_	SgGenCmp	_	_	_	_	_
+_	_	SgNomCmp	_	_	_	_	_
+_	_	Sup	_	_	_	_	_
+_	_	Superl	_	_	_	Degree=Sup	_
+_	_	TV	_	_	_	_	_
+_	_	VAbess	_	_	_	VerbForm=Ger|Case=Abe	_
+_	_	VGen	_	_	_	VerbForm=Ger|Case=Gen	_
+_	A	_	_	_	ADJ	_	_
+_	Adv	_	_	_	ADV	_	_
+_	CC	_	_	_	CCONJ	_	_
+_	CLB	_	_	_	PUNCT	_	_
+_	CS	_	_	_	SCONJ	_	_
+_	Interj	_	_	_	INTJ	_	_
+_	N	_	_	_	NOUN	_	_
+_	Num	_	_	_	NUM	_	_
+_	Pcle	_	_	_	PART	_	_
+_	Po	_	_	_	ADP	_	_
+_	Pr	_	_	_	ADP	_	_
+_	Pron	_	_	_	PRON	_	_
+_	PUNCT	_	_	_	PUNCT	_	_
+_	V	_	_	_	VERB	_	_
+_	A*	_	_	_	A*	_	_
+_	N*	_	_	_	N*	_	_
+_	V*	_	_	_	V*	_	_
+_	_	Adv	_	_	_	Adv	_

@@ -767,7 +767,7 @@
   <def-rule comment="[C] Change for non-clausal objects">
     <template match="//NODE[(@si='←OBJ' or @si='OBJ→') and not(contains(@mi, 'V|'))]">
         <copy>
-        <attr name="si">dobj</attr>
+        <attr name="si">obj</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
@@ -832,7 +832,7 @@
   <def-rule comment="[C] Change for objects attaching to non-finites">
     <template match="//NODE[(@si='-F←OBJ' or @si='-FOBJ→') and not(contains(@mi, 'V|'))]">
         <copy>
-        <attr name="si">dobj</attr>
+        <attr name="si">obj</attr>
         <apply-templates select="@*[name()!='si'] | *"/>
         </copy>
     </template> 
